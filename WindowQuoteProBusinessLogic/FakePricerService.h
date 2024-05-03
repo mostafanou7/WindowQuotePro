@@ -1,0 +1,20 @@
+// PricerService.h
+#pragma once
+
+#include "../WindowQuoteProCommon/IPricerService.h"
+#include <random>
+
+/**
+ * Implements the IPricerService interface to provide pricing based on door material and size.
+ */
+class PricerService : public IPricerService {
+public:
+    float GetPrice(DoorMaterial material, DoorSize size) override {
+        // For simplicity, generate a random price. In a real scenario, this could query an external service or database.
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(1, 100);
+
+        return dis(gen);  // Returns a random price between 1 and 100
+    }
+};
