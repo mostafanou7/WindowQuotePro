@@ -32,7 +32,7 @@ public:
      * @return A fully populated Quote object including the price.
      */
     Quote createQuote(const std::string& quoteName, const std::string& customerName, DoorMaterial material, DoorSize size) {
-        int price = pricerService->GetPrice(material, size);
+        double price = pricerService->GetPrice(material, size);
         Quote newQuote(quoteRepository->getNextID(), quoteName, customerName, material, size, price);
         quoteRepository->saveQuote(newQuote);
         return newQuote;
