@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{9A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowQuoteProDataAccess", "WindowQuoteProDataAccess\WindowQuoteProDataAccess.vcxproj", "{F205E763-FFB9-4C8B-9C37-5075F57B516D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PricerService", "PricerService\PricerService.vcxproj", "{F5F8E8C0-A604-446D-B4B1-D851DA489E75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -45,6 +47,14 @@ Global
 		{F205E763-FFB9-4C8B-9C37-5075F57B516D}.Release|x64.Build.0 = Release|x64
 		{F205E763-FFB9-4C8B-9C37-5075F57B516D}.Release|x86.ActiveCfg = Release|Win32
 		{F205E763-FFB9-4C8B-9C37-5075F57B516D}.Release|x86.Build.0 = Release|Win32
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Debug|x64.ActiveCfg = Debug|x64
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Debug|x64.Build.0 = Debug|x64
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Debug|x86.ActiveCfg = Debug|Win32
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Debug|x86.Build.0 = Debug|Win32
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Release|x64.ActiveCfg = Release|x64
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Release|x64.Build.0 = Release|x64
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Release|x86.ActiveCfg = Release|Win32
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +63,7 @@ Global
 		{D859E49B-747C-4D29-902D-3B8E0E5A065A} = {A4F516C3-3D99-4C9D-A43C-4E5D03344483}
 		{BEB2C0DD-8274-4BFA-ABF7-09DDBF60C1E1} = {A4F516C3-3D99-4C9D-A43C-4E5D03344483}
 		{F205E763-FFB9-4C8B-9C37-5075F57B516D} = {9A70C03C-31A5-443A-93D0-55129AB9E2D3}
+		{F5F8E8C0-A604-446D-B4B1-D851DA489E75} = {9A70C03C-31A5-443A-93D0-55129AB9E2D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72DD37EE-C2A3-4AC8-B10E-5FB06CD54020}

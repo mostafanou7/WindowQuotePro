@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Impl">
+      <UniqueIdentifier>{f920d72f-1626-4354-9553-178fcb0ccd17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -21,14 +24,14 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SQLiteQuoteRepository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sqlite3\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sqlite3\sqlite3ext.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Impl\SQLiteQuoteRepository.h">
+      <Filter>Impl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,8 +47,8 @@
     <ClCompile Include="sqlite3\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SQLiteQuoteRepository.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Impl\SQLiteQuoteRepository.cpp">
+      <Filter>Impl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

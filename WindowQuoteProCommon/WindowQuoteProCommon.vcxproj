@@ -139,11 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Enums.h" />
+    <ClInclude Include="Entities\Enums.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="IPricerService.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Quote.h" />
+    <ClInclude Include="Entities\Quote.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

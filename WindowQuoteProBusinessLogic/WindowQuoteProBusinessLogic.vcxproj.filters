@@ -21,13 +21,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QuoteManager.h">
+    <ClInclude Include="Entities\QuoteManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FakePricerService.h">
+    <ClInclude Include="Abstractions\IQuoteRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IQuoteRepository.h">
+    <ClInclude Include="Abstractions\IPricerService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

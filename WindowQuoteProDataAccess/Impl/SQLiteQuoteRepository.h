@@ -1,8 +1,8 @@
 // SQLiteQuoteRepository.h
 #pragma once
 
-#include "sqlite3/sqlite3.h"
-#include "../WindowQuoteProBusinessLogic/IQuoteRepository.h"
+#include "..\sqlite3\sqlite3.h"
+#include <Abstractions\IQuoteRepository.h>
 #include <vector>
 #include <string>
 

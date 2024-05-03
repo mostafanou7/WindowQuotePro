@@ -2,7 +2,7 @@
 #pragma once
 
 #include <vector>
-#include "..\WindowQuoteProCommon\Quote.h"
+#include <Entities/Quote.h>
 
 /**
  * Interface for the repository handling data operations for quotes.

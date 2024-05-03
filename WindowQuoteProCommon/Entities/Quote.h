@@ -14,7 +14,7 @@ private:
 	std::string customerName {};
 	DoorMaterial doorMaterial {};
 	DoorSize doorSize {};
-	float price {};
+	double price {};
 
 public:
 	//Default costructor
@@ -29,7 +29,7 @@ public:
 	 * @param size Size of the door.
 	 * @param p Price of the quote.
 	 */
-	Quote(int id, std::string qName, std::string cName, DoorMaterial material, DoorSize size, float p)
+	Quote(int id, std::string qName, std::string cName, DoorMaterial material, DoorSize size, double p)
 		: quoteID(id), quoteName(qName), customerName(cName), doorMaterial(material), doorSize(size), price(p) {}
 
 	// Getters
@@ -38,7 +38,7 @@ public:
 	const std::string& getCustomerName() const { return customerName; }
 	DoorMaterial getDoorMaterial() const { return doorMaterial; }
 	DoorSize getDoorSize() const { return doorSize; }
-	float getPrice() const { return price; }
+	double getPrice() const { return price; }
 
 	// Setters
 	void setQuoteID(int id) { quoteID = id; }
@@ -46,5 +46,5 @@ public:
 	void setCustomerName(const std::string& cName) { customerName = cName; }
 	void setDoorMaterial(DoorMaterial material) { doorMaterial = material; }
 	void setDoorSize(DoorSize size) { doorSize = size; }
-	void setPrice(float p) { price = p; }
+	void setPrice(double p) { price = p; }
 };

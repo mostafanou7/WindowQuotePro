@@ -16,7 +16,7 @@ Quote SQLiteQuoteRepository::findQuoteById(int id) {
             const char* customerName = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
             const char* doorMaterial = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
             const char* doorSize = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
-            float price = sqlite3_column_int(stmt, 5);
+            double price = sqlite3_column_double(stmt, 5);
 
             foundQuote = Quote(id, std::string(quoteName), std::string(customerName), to_DoorMaterial(doorMaterial), to_DoorSize(doorSize), price);
         }
@@ -38,7 +38,7 @@ void SQLiteQuoteRepository::saveQuote(const Quote& quote) {
         sqlite3_bind_text(stmt, 2, quote.getCustomerName().c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(stmt, 3, to_string(quote.getDoorMaterial()).c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(stmt, 4, to_string(quote.getDoorSize()).c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_int(stmt, 5, quote.getPrice());
+        sqlite3_bind_double(stmt, 5, quote.getPrice());
 
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
@@ -104,7 +104,7 @@ std::vector<Quote> SQLiteQuoteRepository::retrieveAllQuotes()
             const char* customerName = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
             const char* doorMaterial = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
             const char* doorSize = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 4));
-            float price = sqlite3_column_int(stmt, 5);
+            double price = sqlite3_column_double(stmt, 5);
 
             Quote quote(id, std::string(quoteName), std::string(customerName), to_DoorMaterial(doorMaterial), to_DoorSize(doorSize), price);
             quotes.push_back(quote);

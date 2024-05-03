@@ -2,9 +2,9 @@
 #pragma once
 
 #include <vector>
-#include "../WindowQuoteProCommon/Quote.h"
-#include "../WindowQuoteProCommon/IPricerService.h"
-#include "IQuoteRepository.h"
+#include <Entities/Quote.h>
+#include "../Abstractions/IPricerService.h"
+#include "../Abstractions/IQuoteRepository.h"
 
 /**
  * Manages quote operations such as creation, retrieval, update, and deletion.

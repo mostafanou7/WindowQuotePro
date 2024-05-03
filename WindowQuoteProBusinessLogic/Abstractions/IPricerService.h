@@ -1,6 +1,6 @@
 // IPricerService.h
 #pragma once
-#include "Enums.h"
+#include <Entities/Enums.h>
 
 /**
  * Interface for pricing services that determine the price of a door based on material and size.
@@ -15,5 +15,5 @@ public:
      * @param size The size of the door.
      * @return The price as an integer.
      */
-    virtual float GetPrice(DoorMaterial material, DoorSize size) = 0;
+    virtual double GetPrice(DoorMaterial material, DoorSize size) = 0;
 };
