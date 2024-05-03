@@ -147,7 +147,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Abstractions\IQuoteRepository.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Entities\QuoteManager.h" />
+    <ClInclude Include="Main\QuoteManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

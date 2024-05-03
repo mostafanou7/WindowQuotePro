@@ -21,7 +21,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\QuoteManager.h">
+    <ClInclude Include="Main\QuoteManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Abstractions\IQuoteRepository.h">
