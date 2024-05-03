@@ -2,18 +2,18 @@
 #include<stdexcept>
 #include<string>
 /**
- * Enum class for door materials.
+ * Enum struct for door materials.
  */
-enum class DoorMaterial {
+enum struct DoorMaterial {
 	Wood,
 	Metal
 };
 
 
 /**
- * Enum class for door sizes.
+ * Enum struct for door sizes.
  */
-enum class DoorSize {
+enum struct DoorSize {
 	Small,
 	Medium,
 	Large

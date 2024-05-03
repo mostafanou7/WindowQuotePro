@@ -8,7 +8,7 @@
 /**
  * Implements the IPricerService interface to provide pricing based on door material and size.
  */
-class PricerService : public IPricerService {
+class FakePricerService : public IPricerService {
 public:
     double GetPrice(DoorMaterial material, DoorSize size) override {
         // For simplicity, generate a random price. In a real scenario, this could query an external service or database.

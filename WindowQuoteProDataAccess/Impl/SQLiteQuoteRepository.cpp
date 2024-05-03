@@ -1,6 +1,53 @@
 #include "pch.h"
+
+#ifdef SQLITE3EXPORTS
+#define SQLITE_API __declspec(dllexport)
+#else
+#define SQLITE_API __declspec(dllimport)
+#endif // SQLITE3EXPORTS
+
+#include "..\sqlite3\sqlite3.h"
 #include "SQLiteQuoteRepository.h"
 
+
+
+/**
+* Initializes the database connection.
+*/
+
+void SQLiteQuoteRepository::initializeDatabase() {
+    int rc = sqlite3_open(databaseFilename.c_str(), &db);
+    if (rc) {
+        // Handle errors (e.g., log and throw)
+    }
+    else {
+        createTablesIfNeeded();
+    }
+}
+
+/**
+* Ensures that the necessary database tables are created.
+*/
+
+void SQLiteQuoteRepository::createTablesIfNeeded() {
+    const char* sql = "CREATE TABLE IF NOT EXISTS Quotes ("
+        "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+        "QuoteName TEXT NOT NULL, "
+        "CustomerName TEXT NOT NULL, "
+        "DoorMaterial TEXT NOT NULL, "
+        "DoorSize TEXT NOT NULL, "
+        "Price BINARY_DOUBLE NOT NULL);";
+    char* errMsg = nullptr;
+    int rc = sqlite3_exec(db, sql, nullptr, nullptr, &errMsg);
+    if (rc != SQLITE_OK) {
+        // Handle SQL error (e.g., log and throw)
+        sqlite3_free(errMsg);
+    }
+}
+
+SQLiteQuoteRepository::~SQLiteQuoteRepository() {
+    sqlite3_close(db);
+}
 
 Quote SQLiteQuoteRepository::findQuoteById(int id) {
     Quote foundQuote;
@@ -115,4 +162,9 @@ std::vector<Quote> SQLiteQuoteRepository::retrieveAllQuotes()
         //TODO: Handle SQL error (e.g., log and throw)
     }
     return quotes;
+}
+
+int SQLiteQuoteRepository::getNextID()
+{
+    return 0; //TODO
 }

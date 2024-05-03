@@ -2,6 +2,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include <Entities/Quote.h>
 #include "../Abstractions/IPricerService.h"
 #include "../Abstractions/IQuoteRepository.h"
@@ -11,8 +12,8 @@
  */
 class QuoteManager {
 private:
-    IPricerService* pricerService;
-    IQuoteRepository* quoteRepository;
+    IPricerService* pricerService{};
+    IQuoteRepository* quoteRepository{};
 
 public:
     /**
@@ -23,6 +24,19 @@ public:
     QuoteManager(IPricerService* service, IQuoteRepository* repository)
         : pricerService(service), quoteRepository(repository) {}
 
+    ~QuoteManager()
+    {
+        if (!pricerService)
+        {
+            delete pricerService;
+            pricerService = nullptr;
+        }
+        if (!quoteRepository)
+        {
+            delete quoteRepository;
+            quoteRepository = nullptr;
+        }
+    }
     /**
      * Creates a new quote with the provided details, calculates its price, and saves it.
      * @param quoteName Name of the quote.
