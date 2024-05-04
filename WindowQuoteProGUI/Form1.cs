@@ -7,6 +7,7 @@ namespace WindowQuoteProGUI
         iQuoteManager m_q;
         eDoorMaterial[] m_doorMaterials;
         eDoorSize[] m_doorSizes;
+        sQuote[] m_allQuotes;
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace WindowQuoteProGUI
 
             //Create Quote Manager
             NativeImports.CreateNativeQuoteManager(out m_q);
-                
+
             refreshQuoteList();
 
             //sQuote q;
@@ -62,20 +63,19 @@ namespace WindowQuoteProGUI
 
         private void refreshQuoteList()
         {
-            sQuote[] localOutputs = null!;
-            pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => localOutputs = buffers;
+            pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => m_allQuotes = buffers;
 
             m_q.getAllQuotes(pfnOutputs);
 
             listView1.Items.Clear();
-            for (int i = 0; i < localOutputs.Length; i++)
+            for (int i = 0; i < m_allQuotes.Length; i++)
             {
-                ListViewItem item = new(localOutputs[i].quoteID.ToString());
-                item.SubItems.Add(localOutputs[i].quoteName);
-                item.SubItems.Add(localOutputs[i].customerName);
-                item.SubItems.Add(localOutputs[i].doorMaterial.ToString());
-                item.SubItems.Add(localOutputs[i].doorSize.ToString());
-                item.SubItems.Add(localOutputs[i].price.ToString());
+                ListViewItem item = new(m_allQuotes[i].quoteID.ToString());
+                item.SubItems.Add(m_allQuotes[i].quoteName);
+                item.SubItems.Add(m_allQuotes[i].customerName);
+                item.SubItems.Add(m_allQuotes[i].doorMaterial.ToString());
+                item.SubItems.Add(m_allQuotes[i].doorSize.ToString());
+                item.SubItems.Add(m_allQuotes[i].price.ToString());
                 listView1.Items.Add(item);
             }
         }
@@ -102,6 +102,19 @@ namespace WindowQuoteProGUI
             this.customerName_txtBox.Text = q.customerName;
             this.doorMaterial_cb.SelectedIndex = (int)q.doorMaterial;
             this.doorSize_cb.SelectedIndex = (int)q.doorSize;
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var indices = listView1.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                var index = indices[0];
+                if (index > -1)
+                {
+                    loadQuote(m_allQuotes[index]);
+                }
+            }
         }
     }
 }

@@ -179,12 +179,16 @@
             // 
             listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
             listView1.Location = new Point(12, 264);
+            listView1.MultiSelect = false;
             listView1.Name = "listView1";
             listView1.Size = new Size(714, 384);
             listView1.TabIndex = 14;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // columnHeader1
             // 
