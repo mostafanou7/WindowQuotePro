@@ -9,5 +9,9 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include <atlcoll.h>
+#include <atlstr.h>
+#include <atltypes.h>
+#include <atlcom.h>
 
 #endif //PCH_H

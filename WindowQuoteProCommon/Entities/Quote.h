@@ -42,8 +42,8 @@ public:
 
 	// Setters
 	void setQuoteID(int id) { quoteID = id; }
-	void setQuoteName(const std::string& qName) { quoteName = qName; }
-	void setCustomerName(const std::string& cName) { customerName = cName; }
+	void setQuoteName(const char* qName) { quoteName = qName; }
+	void setCustomerName(const char* cName) { customerName = cName; }
 	void setDoorMaterial(DoorMaterial material) { doorMaterial = material; }
 	void setDoorSize(DoorSize size) { doorSize = size; }
 	void setPrice(double p) { price = p; }

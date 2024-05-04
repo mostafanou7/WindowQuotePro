@@ -2,6 +2,7 @@
 
 namespace Interop
 {
+// Should match sQuote.cs on C# boundary of interop
 struct sQuote
 {
 	int quoteID;

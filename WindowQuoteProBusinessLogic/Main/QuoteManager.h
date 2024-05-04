@@ -45,7 +45,7 @@ public:
      * @param size Door size.
      * @return A fully populated Quote object including the price.
      */
-    Quote createQuote(const std::string& quoteName, const std::string& customerName, DoorMaterial material, DoorSize size) {
+    Quote createQuote(const char* quoteName, const char* customerName, DoorMaterial material, DoorSize size) {
         double price = pricerService->GetPrice(material, size);
         Quote newQuote(quoteRepository->getNextID(), quoteName, customerName, material, size, price);
         quoteRepository->saveQuote(newQuote);

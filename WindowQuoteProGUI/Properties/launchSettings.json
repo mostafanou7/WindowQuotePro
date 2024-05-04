@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WindowQuoteProGUI": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

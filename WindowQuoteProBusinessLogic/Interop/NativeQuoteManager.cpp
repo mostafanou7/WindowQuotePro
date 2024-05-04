@@ -5,11 +5,11 @@
 #include "Utils.h"
 
 
-HRESULT __stdcall Interop::NativeQuoteManager::createQuote(const char* quoteName, const char* customerName, eDoorMaterial material, eDoorSize size, sQuote& iQoute)
+HRESULT __stdcall Interop::NativeQuoteManager::createQuote(const wchar_t* quoteName, const wchar_t* customerName, eDoorMaterial material, eDoorSize size, sQuote& iQoute)
 {
-	auto quote = m_q.createQuote(quoteName, customerName, fromInterop(material), fromInterop(size));
+	auto quote = m_q.createQuote(cstr(utf8String(quoteName)), cstr(utf8String(customerName)), fromInterop(material), fromInterop(size));
 	iQoute = toInterop(quote);
-    return S_OK;
+	return S_OK;
 }
 
 HRESULT __stdcall Interop::NativeQuoteManager::getQuote(int id, sQuote& iQoute)
@@ -44,7 +44,7 @@ HRESULT __stdcall Interop::NativeQuoteManager::getAllQuotes(pfnHaveQuotes pfnRes
 
 	pfnResult((uint32_t)iVec.size(), iVec.data());
 
-    return S_OK;
+	return S_OK;
 }
 
 

@@ -56,5 +56,13 @@
     <ClCompile Include="Interop\NativeQuoteManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WQPBL.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
