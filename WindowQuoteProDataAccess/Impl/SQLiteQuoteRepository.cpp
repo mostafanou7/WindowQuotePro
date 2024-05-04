@@ -70,7 +70,7 @@ Quote SQLiteQuoteRepository::findQuoteById(int id) {
         sqlite3_finalize(stmt);
     }
     else {
-        //TODO: Handle SQL error (e.g., log and throw)
+        throw std::exception("SQLiteQuoteRepository: failed to find Quote by id");
     }
 
     return foundQuote;
@@ -80,21 +80,24 @@ void SQLiteQuoteRepository::saveQuote(const Quote& quote) {
     const char* sql = "INSERT INTO Quotes (QuoteName, CustomerName, DoorMaterial, DoorSize, Price) VALUES (?, ?, ?, ?, ?);";
     sqlite3_stmt* stmt;
     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+    
     if (rc == SQLITE_OK) {
         sqlite3_bind_text(stmt, 1, quote.getQuoteName().c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(stmt, 2, quote.getCustomerName().c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 3, to_string(quote.getDoorMaterial()).c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 4, to_string(quote.getDoorSize()).c_str(), -1, SQLITE_STATIC);
+        std::string doorMat = to_string(quote.getDoorMaterial());
+        sqlite3_bind_text(stmt, 3, doorMat.c_str(), -1, SQLITE_STATIC);
+        std::string doorSize = to_string(quote.getDoorSize());
+        sqlite3_bind_text(stmt, 4, doorSize.c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_double(stmt, 5, quote.getPrice());
 
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
-            //TODO: Handle SQL error (e.g., log and throw)
+            throw std::exception("SQLiteQuoteRepository: failed to insert new Quote");
         }
         sqlite3_finalize(stmt);
     }
     else {
-        //TODO: Handle SQL error (e.g., log and throw)
+        throw std::exception("SQLiteQuoteRepository: failed to insert new Quote");
     }
 }
 
@@ -105,19 +108,21 @@ void SQLiteQuoteRepository::updateQuote(const Quote& quote) {
     if (rc == SQLITE_OK) {
         sqlite3_bind_text(stmt, 1, quote.getQuoteName().c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(stmt, 2, quote.getCustomerName().c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 3, to_string(quote.getDoorMaterial()).c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 4, to_string(quote.getDoorSize()).c_str(), -1, SQLITE_STATIC);
+        std::string doorMat = to_string(quote.getDoorMaterial());
+        sqlite3_bind_text(stmt, 3, doorMat.c_str(), -1, SQLITE_STATIC);
+        std::string doorSize = to_string(quote.getDoorSize());
+        sqlite3_bind_text(stmt, 4, doorSize.c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_double(stmt, 5, quote.getPrice());
         sqlite3_bind_int(stmt, 6, quote.getQuoteID());
 
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
-            //TODO: Handle SQL error (e.g., log and throw)
+            throw std::exception("SQLiteQuoteRepository: failed to update Quote");
         }
         sqlite3_finalize(stmt);
     }
     else {
-        //TODO: Handle SQL error (e.g., log and throw)
+        throw std::exception("SQLiteQuoteRepository: failed to update Quote");
     }
 }
 
@@ -129,12 +134,12 @@ void SQLiteQuoteRepository::deleteQuote(int id) {
         sqlite3_bind_int(stmt, 1, id);
         rc = sqlite3_step(stmt);
         if (rc != SQLITE_DONE) {
-            //TODO: Handle SQL error (e.g., log and throw)
+            throw std::exception("SQLiteQuoteRepository: failed to delete Quote");
         }
         sqlite3_finalize(stmt);
     }
     else {
-        //TODO: Handle SQL error (e.g., log and throw)
+        throw std::exception("SQLiteQuoteRepository: failed to delete Quote");
     }
 }
 
@@ -159,12 +164,27 @@ std::vector<Quote> SQLiteQuoteRepository::retrieveAllQuotes()
         sqlite3_finalize(stmt);
     }
     else {
-        //TODO: Handle SQL error (e.g., log and throw)
+        throw std::exception("SQLiteQuoteRepository: failed to retrieve all Quotes");
     }
     return quotes;
 }
 
-int SQLiteQuoteRepository::getNextID()
-{
-    return 0; //TODO
+int SQLiteQuoteRepository::getNextID() {
+    int nextID = 0;
+
+    const char* sql = "SELECT MAX(ID) FROM Quotes;";
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_step(stmt);
+        if (rc == SQLITE_ROW) {
+            nextID = sqlite3_column_int(stmt, 0) + 1;
+        }
+        sqlite3_finalize(stmt);
+    }
+    else {
+        throw std::exception("SQLiteQuoteRepository: failed to get next ID");
+    }
+
+    return nextID;
 }

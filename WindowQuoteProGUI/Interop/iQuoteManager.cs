@@ -13,6 +13,6 @@ namespace WindowQuoteProGUI.Interop
         void getQuote(int id, out sQuote qoute);
         void updateQuote(sQuote qoute);
         void deleteQuote(int id);
-        void getAllQuotes(pfnHaveQuotes pfnResult);
+        void getAllQuotes([MarshalAs(UnmanagedType.FunctionPtr)] pfnHaveQuotes pfnResult);
     }
 }

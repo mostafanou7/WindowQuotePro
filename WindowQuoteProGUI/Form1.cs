@@ -16,6 +16,16 @@ namespace WindowQuoteProGUI
             sQuote q;
             res.createQuote("testQuote", "Mostafa", eDoorMaterial.Metal, eDoorSize.Small, out q);
 
+            sQuote[] localOutputs = null;
+            pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => localOutputs = buffers;
+
+            res.getAllQuotes(pfnOutputs);
+
+            res.deleteQuote(2);
+
+            q.customerName = "Nouh";
+            res.updateQuote(q);
+
             Console.WriteLine(q.price);
         }
     }

@@ -12,7 +12,7 @@ class NativeQuoteManager : public ComRoot<iQuoteManager>
 {
 	QuoteManager m_q;
 public:
-	NativeQuoteManager() : m_q(new FakePricerService(), new SQLiteQuoteRepository("")){}
+	NativeQuoteManager() : m_q(new FakePricerService(), new SQLiteQuoteRepository("test.db")){}
 	HRESULT __stdcall createQuote(const wchar_t* quoteName, const wchar_t* customerName, eDoorMaterial material, eDoorSize size, sQuote& qoute);
 	HRESULT __stdcall getQuote(int id, sQuote& qoute);
 	HRESULT __stdcall updateQuote(const sQuote& qoute);
