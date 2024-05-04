@@ -35,12 +35,12 @@
             customerName_txtBox = new TextBox();
             quoteName_lbl = new Label();
             customerName_lbl = new Label();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
+            doorMaterial_cb = new ComboBox();
+            doorSize_cb = new ComboBox();
             label1 = new Label();
             label2 = new Label();
-            new_btn = new Button();
-            edit_btn = new Button();
+            create_btn = new Button();
+            update_btn = new Button();
             delete_btn = new Button();
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -107,21 +107,21 @@
             customerName_lbl.TabIndex = 6;
             customerName_lbl.Text = "Customer Name";
             // 
-            // comboBox1
+            // doorMaterial_cb
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(112, 102);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 7;
+            doorMaterial_cb.FormattingEnabled = true;
+            doorMaterial_cb.Location = new Point(112, 102);
+            doorMaterial_cb.Name = "doorMaterial_cb";
+            doorMaterial_cb.Size = new Size(121, 23);
+            doorMaterial_cb.TabIndex = 7;
             // 
-            // comboBox2
+            // doorSize_cb
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(112, 134);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 8;
+            doorSize_cb.FormattingEnabled = true;
+            doorSize_cb.Location = new Point(112, 134);
+            doorSize_cb.Name = "doorSize_cb";
+            doorSize_cb.Size = new Size(121, 23);
+            doorSize_cb.TabIndex = 8;
             // 
             // label1
             // 
@@ -141,23 +141,24 @@
             label2.TabIndex = 10;
             label2.Text = "Door Size";
             // 
-            // new_btn
+            // create_btn
             // 
-            new_btn.Location = new Point(112, 191);
-            new_btn.Name = "new_btn";
-            new_btn.Size = new Size(168, 36);
-            new_btn.TabIndex = 11;
-            new_btn.Text = "New";
-            new_btn.UseVisualStyleBackColor = true;
+            create_btn.Location = new Point(112, 191);
+            create_btn.Name = "create_btn";
+            create_btn.Size = new Size(168, 36);
+            create_btn.TabIndex = 11;
+            create_btn.Text = "Create";
+            create_btn.UseVisualStyleBackColor = true;
+            create_btn.Click += create_btn_Click;
             // 
-            // edit_btn
+            // update_btn
             // 
-            edit_btn.Location = new Point(286, 191);
-            edit_btn.Name = "edit_btn";
-            edit_btn.Size = new Size(168, 36);
-            edit_btn.TabIndex = 12;
-            edit_btn.Text = "Edit";
-            edit_btn.UseVisualStyleBackColor = true;
+            update_btn.Location = new Point(286, 191);
+            update_btn.Name = "update_btn";
+            update_btn.Size = new Size(168, 36);
+            update_btn.TabIndex = 12;
+            update_btn.Text = "Update";
+            update_btn.UseVisualStyleBackColor = true;
             // 
             // delete_btn
             // 
@@ -214,12 +215,12 @@
             ClientSize = new Size(735, 660);
             Controls.Add(listView1);
             Controls.Add(delete_btn);
-            Controls.Add(edit_btn);
-            Controls.Add(new_btn);
+            Controls.Add(update_btn);
+            Controls.Add(create_btn);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(doorSize_cb);
+            Controls.Add(doorMaterial_cb);
             Controls.Add(customerName_lbl);
             Controls.Add(quoteName_lbl);
             Controls.Add(customerName_txtBox);
@@ -228,7 +229,6 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
-            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -245,12 +245,12 @@
         private TextBox customerName_txtBox;
         private Label quoteName_lbl;
         private Label customerName_lbl;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private ComboBox doorMaterial_cb;
+        private ComboBox doorSize_cb;
         private Label label1;
         private Label label2;
-        private Button new_btn;
-        private Button edit_btn;
+        private Button create_btn;
+        private Button update_btn;
         private Button delete_btn;
         private ListView listView1;
         private ColumnHeader columnHeader1;

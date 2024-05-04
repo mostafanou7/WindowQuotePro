@@ -188,8 +188,3 @@ int SQLiteQuoteRepository::getNextID() {
 
     return nextID;
 }
-
-void SQLiteQuoteRepository::close()
-{
-    sqlite3_close(db);
-}

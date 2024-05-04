@@ -14,6 +14,5 @@ namespace WindowQuoteProGUI.Interop
         void updateQuote(sQuote qoute);
         void deleteQuote(int id);
         void getAllQuotes([MarshalAs(UnmanagedType.FunctionPtr)] pfnHaveQuotes pfnResult);
-        void closedb();
     }
 }

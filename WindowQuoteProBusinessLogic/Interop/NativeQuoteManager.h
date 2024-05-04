@@ -18,6 +18,5 @@ public:
 	HRESULT __stdcall updateQuote(const sQuote& qoute);
 	HRESULT __stdcall deleteQuote(int id);
 	HRESULT __stdcall getAllQuotes(pfnHaveQuotes pfnResult);
-	HRESULT __stdcall closedb();
 };
 }

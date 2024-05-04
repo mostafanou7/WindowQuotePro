@@ -48,9 +48,4 @@ public:
 	 * @return A vector containing all the quotes.
 	 */
 	virtual std::vector<Quote> retrieveAllQuotes() = 0;
-
-	/**
-	 * Closes db so that changes are saved to disk
-	 */
-	virtual void close() = 0;
 };
