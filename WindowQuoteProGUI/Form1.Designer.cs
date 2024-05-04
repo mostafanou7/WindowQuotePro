@@ -165,6 +165,7 @@
             update_btn.TabIndex = 12;
             update_btn.Text = "Update";
             update_btn.UseVisualStyleBackColor = true;
+            update_btn.Click += update_btn_Click;
             // 
             // delete_btn
             // 

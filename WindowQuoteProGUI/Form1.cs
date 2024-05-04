@@ -54,9 +54,9 @@ namespace WindowQuoteProGUI
                 return;
 
             m_q.createQuote(quoteName_txtBox.Text, customerName_txtBox.Text,
-                m_doorMaterials[doorMaterial_cb.SelectedIndex], m_doorSizes[doorSize_cb.SelectedIndex], out sQuote qoute);
+                m_doorMaterials[doorMaterial_cb.SelectedIndex], m_doorSizes[doorSize_cb.SelectedIndex], out sQuote quote);
 
-            loadQuote(qoute);
+            loadQuote(quote);
 
             refreshQuoteList();
         }
@@ -113,6 +113,39 @@ namespace WindowQuoteProGUI
                 if (index > -1)
                 {
                     loadQuote(m_allQuotes[index]);
+                }
+            }
+        }
+
+        private void update_btn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(customerName_txtBox.Text)
+                || string.IsNullOrEmpty(quoteName_txtBox.Text)
+                || doorMaterial_cb.SelectedIndex < 0
+                || doorSize_cb.SelectedIndex < 0)
+                return;
+
+            var indices = listView1.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                var index = indices[0];
+                if (index > -1)
+                {
+
+                    //Find quote by id
+                    m_q.getQuote(m_allQuotes[index].quoteID, out sQuote quote);
+
+                    //Update quote
+                    quote.quoteName = quoteName_txtBox.Text;
+                    quote.customerName = customerName_txtBox.Text;
+                    quote.doorMaterial = (eDoorMaterial)doorMaterial_cb.SelectedIndex;
+                    quote.doorSize = (eDoorSize)doorSize_cb.SelectedIndex;
+
+                    m_q.updateQuote(quote);
+
+                    loadQuote(quote);
+
+                    refreshQuoteList();
                 }
             }
         }
