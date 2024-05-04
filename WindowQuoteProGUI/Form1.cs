@@ -4,6 +4,7 @@ namespace WindowQuoteProGUI
 {
     public partial class Form1 : Form
     {
+        iQuoteManager res;
         public Form1()
         {
             InitializeComponent();
@@ -11,7 +12,7 @@ namespace WindowQuoteProGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            iQuoteManager res;
+            
             NativeImports.CreateNativeQuoteManager(out res);
             sQuote q;
             res.createQuote("testQuote", "Mostafa", eDoorMaterial.Metal, eDoorSize.Small, out q);
@@ -27,6 +28,16 @@ namespace WindowQuoteProGUI
             res.updateQuote(q);
 
             Console.WriteLine(q.price);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            res.closedb();
         }
     }
 }

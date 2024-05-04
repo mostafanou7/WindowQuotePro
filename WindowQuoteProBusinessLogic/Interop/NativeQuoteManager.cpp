@@ -47,6 +47,12 @@ HRESULT __stdcall Interop::NativeQuoteManager::getAllQuotes(pfnHaveQuotes pfnRes
 	return S_OK;
 }
 
+HRESULT __stdcall Interop::NativeQuoteManager::closedb()
+{
+	m_q.closedb();
+	return S_OK;
+}
+
 
 HRESULT __stdcall CreateNativeQuoteManager(Interop::iQuoteManager** ppResult)
 {

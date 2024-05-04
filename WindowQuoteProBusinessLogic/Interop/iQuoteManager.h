@@ -15,5 +15,6 @@ __interface __declspec(uuid("98DA7DE7-7A0F-4DE5-881C-0CFDCFCC3221")) iQuoteManag
 	HRESULT __stdcall updateQuote(const sQuote& qoute);
 	HRESULT __stdcall deleteQuote(int id);
 	HRESULT __stdcall getAllQuotes(pfnHaveQuotes pfnResult);
+	HRESULT __stdcall closedb();
 };
 }

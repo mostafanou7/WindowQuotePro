@@ -94,4 +94,11 @@ public:
     std::vector<Quote> getAllQuotes() {
         return quoteRepository->retrieveAllQuotes();
     }
+
+    /**
+    * Closes db so that changes are saved to disk
+    */
+    void closedb() {
+        quoteRepository->close();
+    }
 };

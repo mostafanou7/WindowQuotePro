@@ -48,4 +48,7 @@ public:
     WINDOWQUOTEPRODATAACCESS_API void deleteQuote(int id) override;
     WINDOWQUOTEPRODATAACCESS_API std::vector<Quote> retrieveAllQuotes() override;
     WINDOWQUOTEPRODATAACCESS_API int getNextID() override;
+
+    // Inherited via IQuoteRepository
+    void close() override;
 };
