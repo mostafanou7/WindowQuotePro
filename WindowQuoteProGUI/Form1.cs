@@ -8,6 +8,7 @@ namespace WindowQuoteProGUI
         eDoorMaterial[] m_doorMaterials;
         eDoorSize[] m_doorSizes;
         sQuote[] m_allQuotes;
+        int m_selectedIndex = -1;
         public Form1()
         {
             InitializeComponent();
@@ -22,22 +23,6 @@ namespace WindowQuoteProGUI
             NativeImports.CreateNativeQuoteManager(out m_q);
 
             refreshQuoteList();
-
-            //sQuote q;
-            //m_q.createQuote("testQuote", "Mostafa", eDoorMaterial.Metal, eDoorSize.Small, out q);
-
-            //sQuote[] localOutputs = null!;
-            //pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => localOutputs = buffers;
-
-            //m_q.getAllQuotes(pfnOutputs);
-
-            //m_q.deleteQuote(2);
-
-            //q.customerName = "Nouh";
-            //m_q.updateQuote(q);
-
-            //res = null!;
-
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,6 +44,10 @@ namespace WindowQuoteProGUI
             loadQuote(quote);
 
             refreshQuoteList();
+
+            int index = m_allQuotes.findIndex((q) => q.quoteID == quote.quoteID);
+
+            updateSelection(index);
         }
 
         private void refreshQuoteList()
@@ -104,6 +93,27 @@ namespace WindowQuoteProGUI
             this.doorSize_cb.SelectedIndex = (int)q.doorSize;
         }
 
+        private void updateSelection(int i)
+        {
+            if (i < m_allQuotes.Count() && i > -1)
+            {
+                m_selectedIndex = i;
+                listView1.Items[i].Selected = true;
+                listView1.EnsureVisible(i);
+                listView1.Select();
+            }
+        }
+
+        private void reset()
+        {
+            this.ID_txtbox.Clear();
+            this.price_txtbox.Clear();
+            this.quoteName_txtBox.Clear();
+            this.customerName_txtBox.Clear();
+            this.doorMaterial_cb.SelectedIndex = -1;
+            this.doorSize_cb.SelectedIndex = -1;
+        }
+
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var indices = listView1.SelectedIndices;
@@ -112,9 +122,12 @@ namespace WindowQuoteProGUI
                 var index = indices[0];
                 if (index > -1)
                 {
+                    m_selectedIndex = index;
                     loadQuote(m_allQuotes[index]);
+                    return;
                 }
             }
+            reset();
         }
 
         private void update_btn_Click(object sender, EventArgs e)
@@ -146,8 +159,34 @@ namespace WindowQuoteProGUI
                     loadQuote(quote);
 
                     refreshQuoteList();
+
+                    reset();
                 }
             }
+        }
+
+        private void delete_btn_Click(object sender, EventArgs e)
+        {
+            var indices = listView1.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                var index = indices[0];
+                if (index > -1)
+                {
+
+                    //Find quote by id
+                    m_q.deleteQuote(m_allQuotes[index].quoteID);
+
+                    refreshQuoteList();
+
+                    updateSelection(m_selectedIndex);
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            m_q = null!;
         }
     }
 }

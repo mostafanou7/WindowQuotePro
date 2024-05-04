@@ -175,6 +175,7 @@
             delete_btn.TabIndex = 13;
             delete_btn.Text = "Delete";
             delete_btn.UseVisualStyleBackColor = true;
+            delete_btn.Click += delete_btn_Click;
             // 
             // listView1
             // 
@@ -279,6 +280,7 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Window Quote Pro";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
