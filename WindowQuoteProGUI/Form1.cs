@@ -2,7 +2,7 @@ using WindowQuoteProGUI.Interop;
 
 namespace WindowQuoteProGUI
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         iQuoteManager m_q;
         eDoorMaterial[] m_doorMaterials;
@@ -10,12 +10,13 @@ namespace WindowQuoteProGUI
         sQuote[] m_allQuotes;
         int m_selectedIndex = -1;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Form1()
+        public MainForm()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             InitializeComponent();
         }
 
+        #region Event Handlers
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -26,12 +27,32 @@ namespace WindowQuoteProGUI
 
             refreshQuoteList();
         }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var indices = listView1.SelectedIndices;
+            if (indices.Count > 0)
+            {
+                var index = indices[0];
+                if (index > -1)
+                {
+                    m_selectedIndex = index;
+                    loadQuote(m_allQuotes[index]);
+                    return;
+                }
+            }
+            reset();
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            m_q = null!;
+        }
+        #endregion
 
+        #region Buttons
         private void create_btn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(customerName_txtBox.Text) ||
@@ -51,91 +72,6 @@ namespace WindowQuoteProGUI
 
             updateSelection(index);
         }
-
-        private void refreshQuoteList()
-        {
-            pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => m_allQuotes = buffers;
-
-            m_q.getAllQuotes(pfnOutputs);
-
-            listView1.Items.Clear();
-            if (m_allQuotes == null)
-                return;
-            for (int i = 0; i < m_allQuotes.Length; i++)
-            {
-                ListViewItem item = new(m_allQuotes[i].quoteID.ToString());
-                item.SubItems.Add(m_allQuotes[i].quoteName);
-                item.SubItems.Add(m_allQuotes[i].customerName);
-                item.SubItems.Add(m_allQuotes[i].doorMaterial.ToString());
-                item.SubItems.Add(m_allQuotes[i].doorSize.ToString());
-                item.SubItems.Add(m_allQuotes[i].price.ToString());
-                listView1.Items.Add(item);
-            }
-        }
-
-        private void populateComboBoxes()
-        {
-            m_doorMaterials = Utils.enumValues<eDoorMaterial>().ToArray();
-            foreach (var m in m_doorMaterials)
-            {
-                doorMaterial_cb.Items.Add(m.ToString());
-            }
-            m_doorSizes = Utils.enumValues<eDoorSize>().ToArray();
-            foreach (var s in m_doorSizes)
-            {
-                doorSize_cb.Items.Add(s.ToString());
-            }
-        }
-
-        private void loadQuote(sQuote q)
-        {
-            this.ID_txtbox.Text = q.quoteID.ToString();
-            this.price_txtbox.Text = q.price.ToString();
-            this.quoteName_txtBox.Text = q.quoteName;
-            this.customerName_txtBox.Text = q.customerName;
-            this.doorMaterial_cb.SelectedIndex = (int)q.doorMaterial;
-            this.doorSize_cb.SelectedIndex = (int)q.doorSize;
-        }
-
-        private void updateSelection(int i)
-        {
-            if (i < m_allQuotes?.Count() && i > -1)
-            {
-                m_selectedIndex = i;
-                listView1.Items[i].Selected = true;
-                listView1.EnsureVisible(i);
-                listView1.Select();
-            }
-            else
-                reset();
-        }
-
-        private void reset()
-        {
-            this.ID_txtbox.Clear();
-            this.price_txtbox.Clear();
-            this.quoteName_txtBox.Clear();
-            this.customerName_txtBox.Clear();
-            this.doorMaterial_cb.SelectedIndex = -1;
-            this.doorSize_cb.SelectedIndex = -1;
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var indices = listView1.SelectedIndices;
-            if (indices.Count > 0)
-            {
-                var index = indices[0];
-                if (index > -1)
-                {
-                    m_selectedIndex = index;
-                    loadQuote(m_allQuotes[index]);
-                    return;
-                }
-            }
-            reset();
-        }
-
         private void update_btn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(customerName_txtBox.Text)
@@ -171,7 +107,6 @@ namespace WindowQuoteProGUI
                 }
             }
         }
-
         private void delete_btn_Click(object sender, EventArgs e)
         {
             var indices = listView1.SelectedIndices;
@@ -190,10 +125,73 @@ namespace WindowQuoteProGUI
                 }
             }
         }
+        #endregion
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        #region Helpers
+        private void refreshQuoteList()
         {
-            m_q = null!;
+            pfnHaveQuotes pfnOutputs = (int length, sQuote[] buffers) => m_allQuotes = buffers;
+
+            m_q.getAllQuotes(pfnOutputs);
+
+            listView1.Items.Clear();
+            if (m_allQuotes == null)
+                return;
+            for (int i = 0; i < m_allQuotes.Length; i++)
+            {
+                ListViewItem item = new(m_allQuotes[i].quoteID.ToString());
+                item.SubItems.Add(m_allQuotes[i].quoteName);
+                item.SubItems.Add(m_allQuotes[i].customerName);
+                item.SubItems.Add(m_allQuotes[i].doorMaterial.ToString());
+                item.SubItems.Add(m_allQuotes[i].doorSize.ToString());
+                item.SubItems.Add(m_allQuotes[i].price.ToString());
+                listView1.Items.Add(item);
+            }
         }
+        private void populateComboBoxes()
+        {
+            m_doorMaterials = Utils.enumValues<eDoorMaterial>().ToArray();
+            foreach (var m in m_doorMaterials)
+            {
+                doorMaterial_cb.Items.Add(m.ToString());
+            }
+            m_doorSizes = Utils.enumValues<eDoorSize>().ToArray();
+            foreach (var s in m_doorSizes)
+            {
+                doorSize_cb.Items.Add(s.ToString());
+            }
+        }
+        private void loadQuote(sQuote q)
+        {
+            this.ID_txtbox.Text = q.quoteID.ToString();
+            this.price_txtbox.Text = q.price.ToString();
+            this.quoteName_txtBox.Text = q.quoteName;
+            this.customerName_txtBox.Text = q.customerName;
+            this.doorMaterial_cb.SelectedIndex = (int)q.doorMaterial;
+            this.doorSize_cb.SelectedIndex = (int)q.doorSize;
+        }
+        private void updateSelection(int i)
+        {
+            if (i < m_allQuotes?.Count() && i > -1)
+            {
+                m_selectedIndex = i;
+                listView1.Items[i].Selected = true;
+                listView1.EnsureVisible(i);
+                listView1.Select();
+            }
+            else
+                reset();
+        }
+        private void reset()
+        {
+            this.ID_txtbox.Clear();
+            this.price_txtbox.Clear();
+            this.quoteName_txtBox.Clear();
+            this.customerName_txtBox.Clear();
+            this.doorMaterial_cb.SelectedIndex = -1;
+            this.doorSize_cb.SelectedIndex = -1;
+        }
+        #endregion
+
     }
 }
