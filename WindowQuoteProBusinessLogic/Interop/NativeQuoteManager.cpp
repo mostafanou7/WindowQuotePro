@@ -19,9 +19,9 @@ HRESULT __stdcall Interop::NativeQuoteManager::getQuote(int id, sQuote& iQoute)
 	return S_OK;
 }
 
-HRESULT __stdcall Interop::NativeQuoteManager::updateQuote(const sQuote& iQoute)
+HRESULT __stdcall Interop::NativeQuoteManager::updateQuote(const sQuote& iQoute, bool updatePrice)
 {
-	bool success = m_q.updateQuote(fromInterop(iQoute));
+	bool success = m_q.updateQuote(fromInterop(iQoute), updatePrice);
 	return success ? S_OK : S_FALSE;
 }
 

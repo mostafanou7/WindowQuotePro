@@ -9,7 +9,9 @@ namespace WindowQuoteProGUI
         eDoorSize[] m_doorSizes;
         sQuote[] m_allQuotes;
         int m_selectedIndex = -1;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public Form1()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             InitializeComponent();
         }
@@ -57,6 +59,8 @@ namespace WindowQuoteProGUI
             m_q.getAllQuotes(pfnOutputs);
 
             listView1.Items.Clear();
+            if (m_allQuotes == null)
+                return;
             for (int i = 0; i < m_allQuotes.Length; i++)
             {
                 ListViewItem item = new(m_allQuotes[i].quoteID.ToString());
@@ -95,13 +99,15 @@ namespace WindowQuoteProGUI
 
         private void updateSelection(int i)
         {
-            if (i < m_allQuotes.Count() && i > -1)
+            if (i < m_allQuotes?.Count() && i > -1)
             {
                 m_selectedIndex = i;
                 listView1.Items[i].Selected = true;
                 listView1.EnsureVisible(i);
                 listView1.Select();
             }
+            else
+                reset();
         }
 
         private void reset()
@@ -144,9 +150,10 @@ namespace WindowQuoteProGUI
                 var index = indices[0];
                 if (index > -1)
                 {
+                    var quote = m_allQuotes[index];
 
-                    //Find quote by id
-                    m_q.getQuote(m_allQuotes[index].quoteID, out sQuote quote);
+                    bool updatePrice = quote.doorMaterial != (eDoorMaterial)doorMaterial_cb.SelectedIndex
+                        || quote.doorSize != (eDoorSize)doorSize_cb.SelectedIndex;
 
                     //Update quote
                     quote.quoteName = quoteName_txtBox.Text;
@@ -154,13 +161,13 @@ namespace WindowQuoteProGUI
                     quote.doorMaterial = (eDoorMaterial)doorMaterial_cb.SelectedIndex;
                     quote.doorSize = (eDoorSize)doorSize_cb.SelectedIndex;
 
-                    m_q.updateQuote(quote);
-
-                    loadQuote(quote);
+                    m_q.updateQuote(quote, updatePrice);
 
                     refreshQuoteList();
 
-                    reset();
+                    index = m_allQuotes.findIndex((q) => q.quoteID == quote.quoteID);
+
+                    updateSelection(index);
                 }
             }
         }

@@ -12,7 +12,7 @@ __interface __declspec(uuid("98DA7DE7-7A0F-4DE5-881C-0CFDCFCC3221")) iQuoteManag
 {
 	HRESULT __stdcall createQuote(const wchar_t* quoteName, const wchar_t* customerName, eDoorMaterial material, eDoorSize size, sQuote& qoute);
 	HRESULT __stdcall getQuote(int id, sQuote& qoute);
-	HRESULT __stdcall updateQuote(const sQuote& qoute);
+	HRESULT __stdcall updateQuote(const sQuote& qoute, bool updatePrice);
 	HRESULT __stdcall deleteQuote(int id);
 	HRESULT __stdcall getAllQuotes(pfnHaveQuotes pfnResult);
 };

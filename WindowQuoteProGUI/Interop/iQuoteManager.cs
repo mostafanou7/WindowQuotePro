@@ -11,7 +11,7 @@ namespace WindowQuoteProGUI.Interop
     {
         void createQuote([In, MarshalAs(UnmanagedType.LPWStr)] string quoteName, [In, MarshalAs(UnmanagedType.LPWStr)] string customerName, eDoorMaterial material, eDoorSize size, out sQuote qoute);
         void getQuote(int id, out sQuote qoute);
-        void updateQuote(sQuote qoute);
+        void updateQuote(sQuote qoute, bool updatePrice);
         void deleteQuote(int id);
         void getAllQuotes([MarshalAs(UnmanagedType.FunctionPtr)] pfnHaveQuotes pfnResult);
     }
