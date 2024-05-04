@@ -110,10 +110,10 @@ Interop::sQuote toInterop(const Quote& q)
 	iq.quoteID = q.getQuoteID();
 	CString quoteName(q.getQuoteName().c_str());
 	CComBSTR bs{ quoteName };
-	iq.quoteName = bs;
+	iq.quoteName = bs.Copy();
 	CString customerName(q.getCustomerName().c_str());
 	CComBSTR bs1{ customerName };
-	iq.customerName = bs1;
+	iq.customerName = bs1.Copy();
 	iq.doorMaterial = toInterop(q.getDoorMaterial());
 	iq.doorSize = toInterop(q.getDoorSize());
 	iq.price = q.getPrice();

@@ -49,6 +49,10 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
+            ID_txtbox = new TextBox();
+            price_txtbox = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -109,6 +113,7 @@
             // 
             // doorMaterial_cb
             // 
+            doorMaterial_cb.DropDownStyle = ComboBoxStyle.DropDownList;
             doorMaterial_cb.FormattingEnabled = true;
             doorMaterial_cb.Location = new Point(112, 102);
             doorMaterial_cb.Name = "doorMaterial_cb";
@@ -117,6 +122,7 @@
             // 
             // doorSize_cb
             // 
+            doorSize_cb.DropDownStyle = ComboBoxStyle.DropDownList;
             doorSize_cb.FormattingEnabled = true;
             doorSize_cb.Location = new Point(112, 134);
             doorSize_cb.Name = "doorSize_cb";
@@ -171,6 +177,7 @@
             // 
             // listView1
             // 
+            listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
             listView1.Location = new Point(12, 264);
             listView1.Name = "listView1";
@@ -208,11 +215,49 @@
             columnHeader6.Text = "Price";
             columnHeader6.Width = 100;
             // 
+            // ID_txtbox
+            // 
+            ID_txtbox.Enabled = false;
+            ID_txtbox.Location = new Point(425, 43);
+            ID_txtbox.Name = "ID_txtbox";
+            ID_txtbox.Size = new Size(77, 23);
+            ID_txtbox.TabIndex = 15;
+            // 
+            // price_txtbox
+            // 
+            price_txtbox.Enabled = false;
+            price_txtbox.Location = new Point(425, 74);
+            price_txtbox.Name = "price_txtbox";
+            price_txtbox.Size = new Size(77, 23);
+            price_txtbox.TabIndex = 16;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(366, 46);
+            label3.Name = "label3";
+            label3.Size = new Size(54, 15);
+            label3.TabIndex = 17;
+            label3.Text = "Quote ID";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(366, 77);
+            label4.Name = "label4";
+            label4.Size = new Size(33, 15);
+            label4.TabIndex = 18;
+            label4.Text = "Price";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(735, 660);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(price_txtbox);
+            Controls.Add(ID_txtbox);
             Controls.Add(listView1);
             Controls.Add(delete_btn);
             Controls.Add(update_btn);
@@ -228,7 +273,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
-            Text = "Form1";
+            Text = "Window Quote Pro";
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -259,5 +304,9 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
+        private TextBox ID_txtbox;
+        private TextBox price_txtbox;
+        private Label label3;
+        private Label label4;
     }
 }

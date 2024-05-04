@@ -95,10 +95,4 @@ public:
         return quoteRepository->retrieveAllQuotes();
     }
 
-    /**
-    * Closes db so that changes are saved to disk
-    */
-    void closedb() {
-        quoteRepository->close();
-    }
 };
