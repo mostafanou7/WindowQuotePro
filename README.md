@@ -1,6 +1,6 @@
 # WindowQuotePro
 
-WindowQuotePro is a simple CRUD application built in C++ using Microsoft Visual Studio. It streamlines the quotation process for window distributors, allowing users to create, view, edit, and delete quotes.
+WindowQuotePro is a simple CRUD application that leverages C++ in the backend, powered by SQLite3 for efficient data management. On the frontend, it harnesses the versatility of WinForms in C#, meticulously crafted in Microsoft Visual Studio. To seamlessly bridge the communication gap between the frontend and backend, an interop layer is meticulously engineered using the COM IUnknown interface, ensuring smooth data exchange and enhanced user experience.
 
 ## Features
 
